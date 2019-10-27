@@ -13,9 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/register', 'AuthController@register');
+Route::post('/register', 'AuthController@registerClient');
+Route::post('/add_users', 'AuthController@registerUsers');
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 Route::get('/user', 'AuthController@getAuthUser');
+
+Route::resource('/role', 'RoleController');
+
 
 

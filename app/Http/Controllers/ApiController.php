@@ -49,7 +49,7 @@ class ApiController extends Controller
                     'status' => 'fail_validation',
                     'ok' => false,
                     "message" => $message,
-                    "inputs" => $fields
+                    "invalid_inputs" => $fields
                 ]
             ]);
     }

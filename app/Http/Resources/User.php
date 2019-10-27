@@ -21,6 +21,7 @@ class User extends JsonResource
             'correo' => $this->email,
             'nombre_completo' => $this->first_name . ' ' . $this->last_name,
             'fecha_creacion' => $this->created_at,
+            'role' => $this->role->name_role
         ];
     }
 }

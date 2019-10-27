@@ -18,15 +18,33 @@ class AuthController extends ApiController
         $this->middleware('jwt.auth', ['only' => ['logout','getAuthUser']]);
     }
 
-    public function register(Request $request)
+    public function registerClient(Request $request)
     {
         $validation = $this->validateRegister($request->all());
 
         if($validation->fails()) {
-            return $this->respondWithErrorValidation("No se ha proporcionado un token de validacion",$validation->errors()->toArray());
+            return $this->respondWithErrorValidation("Hubo un error con los campos proporcionados",$validation->errors()->toArray());
         }
 
-        $user = new UserResource(User::createUser($request));
+        $user = User::createUser($request)->load('role');
+
+        $user = new UserResource($user);
+
+        return $this->respondSuccessCreated("Usuario registrado con exito",['user' => $user]);
+
+    }
+
+    public function registerUsers(Request $request)
+    {
+        $validation = $this->validateRegister($request->all());
+
+        if($validation->fails()) {
+            return $this->respondWithErrorValidation("Hubo un error con los campos proporcionados",$validation->errors()->toArray());
+        }
+
+        $user = User::createUser($request)->load('role');
+
+        $user = new UserResource($user);
 
         return $this->respondSuccessCreated("Usuario registrado con exito",['user' => $user]);
 
@@ -47,19 +65,12 @@ class AuthController extends ApiController
 
     public function logout(Request  $request) {
 
-//        $validation = $this->validateToken($request->all());
-//
-//        if($validation->fails()) {
-//            return $this->respondWithErrorValidation("Hubo un error con los campos para registrar usuario",$validation->errors()->toArray());
-//        }
-
-            if(auth()->check()){
-                auth()->logout();
-                return $this->respondSuccess("Cierre de session exitoso");
-            }else{
-                return $this->respondWithError("No hay session iniciada");
-            }
-
+        if(auth()->check()){
+            auth()->logout();
+            return $this->respondSuccess("Cierre de session exitoso");
+        }else{
+            return $this->respondWithError("No hay session iniciada");
+        }
 
     }
 
@@ -70,6 +81,7 @@ class AuthController extends ApiController
         if(!$user){
             $this->respondFailAuthentication("El token no valido");
         }
+        $user = (new UserResource($user))->toArray(request());
 
         return $this->respondSuccess("Token validado con exito",['user' => $user]);
 
@@ -82,8 +94,10 @@ class AuthController extends ApiController
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role_id' => ['nullable'],
         ]);
     }
+
 
     protected function validateToken(array $data)
     {

@@ -12,15 +12,11 @@ class ShopController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware(['jwt.auth'], ['only' => ['buyProduct','getProducts']]);
+        $this->middleware(['jwt.auth'], ['only' => ['buyProduct']]);
     }
 
     public function getProducts(Request $request)
     {
-        $this->validate($request,[
-            'token' => ['required']
-        ]);
-
         $products = Stock::with(['product','product.category'])
                         ->select('brand',
                                     'model',

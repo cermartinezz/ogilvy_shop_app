@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -50,7 +51,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
+        $path = $request->root();
+        $url = "$path/login";
         if ($exception instanceof UnauthorizedHttpException) {
             $preException = $exception->getPrevious();
             if ($preException instanceof
@@ -58,7 +60,8 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'resultado' => [
                         'status' => 'fail',
-                        'error'=> 'TOKEN_EXPIRED'
+                        'error'=> 'TOKEN_EXPIRED',
+                        'url' => $url
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
             } else if ($preException instanceof
@@ -66,7 +69,8 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'resultado' => [
                         'status' => 'fail',
-                        'error'=> 'TOKEN_INVALID'
+                        'error'=> 'TOKEN_INVALID',
+                        'url' => $url
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
             } else if ($preException instanceof
@@ -74,7 +78,8 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'resultado' => [
                         'status' => 'fail',
-                        'error'=> 'TOKEN_BLACKLISTED'
+                        'error'=> 'TOKEN_BLACKLISTED',
+                        'url' => $url
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
             }
@@ -82,7 +87,8 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'resultado' => [
                         'status' => 'fail',
-                        'error'=> 'Token not provided'
+                        'error'=> 'Token not provided',
+                        'url' => $url
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
             }

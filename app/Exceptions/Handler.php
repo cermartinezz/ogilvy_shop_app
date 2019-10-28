@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
@@ -52,16 +55,44 @@ class Handler extends ExceptionHandler
             $preException = $exception->getPrevious();
             if ($preException instanceof
                 \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
-                return response()->json(['error' => 'TOKEN_EXPIRED']);
+                return response()->json([
+                    'resultado' => [
+                        'error'=> 'TOKEN_EXPIRED'
+                    ]
+                ],Response::HTTP_UNAUTHORIZED);
             } else if ($preException instanceof
                 \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
-                return response()->json(['error' => 'TOKEN_INVALID']);
+                return response()->json([
+                    'resultado' => [
+                        'error'=> 'TOKEN_INVALID'
+                    ]
+                ],Response::HTTP_UNAUTHORIZED);
             } else if ($preException instanceof
                 \Tymon\JWTAuth\Exceptions\TokenBlacklistedException) {
-                return response()->json(['error' => 'TOKEN_BLACKLISTED']);
+                return response()->json([
+                    'resultado' => [
+                        'error'=> 'TOKEN_BLACKLISTED'
+                    ]
+                ],Response::HTTP_UNAUTHORIZED);
             }
             if ($exception->getMessage() === 'Token not provided') {
-                return response()->json(['error' => 'Token not provided']);
+                return response()->json([
+                    'resultado' => [
+                        'error'=> 'Token not provided'
+                    ]
+                ],Response::HTTP_UNAUTHORIZED);
+            }
+        }
+
+        if($exception instanceof ModelNotFoundException){
+            $modelo = explode('\\', $exception->getModel());
+            $modelo = Str::lower(end($modelo));
+            if(Str::contains($exception->getMessage(),'No query results for model')){
+                return response()->json([
+                    'resultado' => [
+                        'error'=> "The $modelo requested does not exists"
+                    ]
+                ],Response::HTTP_NOT_FOUND);
             }
         }
 

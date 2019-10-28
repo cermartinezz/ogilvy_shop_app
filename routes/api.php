@@ -21,6 +21,7 @@ Route::get('/user', 'AuthController@getAuthUser');
 
 Route::resource('/role', 'RoleController');
 Route::resource('/product', 'ProductController');
+Route::resource('/stock', 'StockController');
 
 
 

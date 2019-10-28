@@ -23,3 +23,19 @@ Instalacion
  - npm run dev
  - php artisan jwt:secret
  - php artisan key:generate
+ 
+ Uso
+ 
+ Para levantar la aplicacion se puede utilizar el siguiente comando
+ 
+ php asrtisan verve deberia de levantar la aplicacion en la siguiente url
+ 
+ http://127.0.0.1:8000/
+ 
+ Ruta base de la API http://127.0.0.1:8000/api/register
+ 
+ Ruta base de la Aplicacion Web http://127.0.0.1:8000/
+ 
+
+ Para probar la API adjunto al inicio la documentacion de esta de como se puede consumir desde una aplicacion como Postman o desde la terminar con curl, siempre y cuando este arriba la aplicacion.
+ 

@@ -25,14 +25,14 @@ Instalacion
 
  - crear archivo .env y copiar contenido del archivo .env.example
  - crear base de datos de mysql
- - modificar los siguientes campos el archivo .env con las credenciales de la base de datos creada
+ - modificar los siguientes campos el archivo .env con las credenciales de la base de datos creada segun su configuracion
  
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=laravel
-    DB_USERNAME=root
-    DB_PASSWORD=
+    . DB_CONNECTION=mysql
+    - DB_HOST=127.0.0.1
+    - DB_PORT=3306
+    - DB_DATABASE=laravel
+    - DB_USERNAME=root
+    - DB_PASSWORD=
     
  Acceder a la carpeta del proyecto desde la terminar y ejecutar los siguientes comandos.
  

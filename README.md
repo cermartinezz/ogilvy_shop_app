@@ -47,7 +47,7 @@ Instalacion
  
  Para levantar la aplicacion se puede utilizar el siguiente comando dentro de la carpeta del proyecto desde la terminar
  
- php asrtisan verve 
+  - php asrtisan serve 
  
  Esto deberia de levantar la aplicacion en la siguiente url
  

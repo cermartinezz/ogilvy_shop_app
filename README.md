@@ -27,7 +27,7 @@ Instalacion
  - crear base de datos de mysql
  - modificar los siguientes campos el archivo .env con las credenciales de la base de datos creada segun su configuracion
  
-    . DB_CONNECTION=mysql
+    - DB_CONNECTION=mysql
     - DB_HOST=127.0.0.1
     - DB_PORT=3306
     - DB_DATABASE=laravel

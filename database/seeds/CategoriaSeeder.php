@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaSeeder extends Seeder
 {
@@ -19,6 +20,11 @@ class CategoriaSeeder extends Seeder
         DB::table('categories')->insert([
             'name' => 'Electrodomesticos',
             'slug' => 'electrodomesticos'
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Tecnologia',
+            'slug' => 'tecnologia'
         ]);
     }
 }

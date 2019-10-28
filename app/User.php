@@ -3,11 +3,9 @@
 namespace App;
 
 use App\Model\Role;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
-
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -46,6 +44,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
+    /**
+     * Crea un usuario administrador o usuario
+     * @param Request $request
+     * @return mixed
+     */
     public static function createUser(Request $request){
 
         $role = ($request->has('role')) ?  $request->get('role') : 2 ;

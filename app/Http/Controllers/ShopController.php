@@ -6,7 +6,6 @@ use App\Model\Stock;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ShopController extends ApiController
 {
@@ -15,6 +14,11 @@ class ShopController extends ApiController
         $this->middleware(['jwt.auth'], ['only' => ['buyProduct']]);
     }
 
+    /**
+     * Lista de productos disponibles para compras
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getProducts(Request $request)
     {
         $products = Stock::with(['product','product.category'])
@@ -42,8 +46,14 @@ class ShopController extends ApiController
         return $this->respondSuccess("Datos encontrados", ['items' => $products] );
     }
 
+    /**
+     * Compra de productos
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function buyProduct(Request $request){
 
+        //Obtenemos el primer producto disponible del inventario
         $product = Stock::where([
             ['brand', $request->get('brand') ],
             ['model', $request->get('model') ],
@@ -57,6 +67,7 @@ class ShopController extends ApiController
 
         $user = auth()->user();
 
+        //Actualizamos la disponibilidad del producto a comprado y le asignamos al comprador
         $product->update([
             'available' => 3,
             'buyer' => $user->id,
@@ -64,7 +75,7 @@ class ShopController extends ApiController
 
         $product->load('owner');
 
-        return $this->respondSuccess("Compra realizada con exito", ['items'=>$product]);
+        return $this->respondSuccess("Compra realizada con exito", ['items' => $product]);
 
     }
 }

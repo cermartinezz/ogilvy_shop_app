@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductoSeeder extends Seeder
 {
@@ -31,7 +32,7 @@ class ProductoSeeder extends Seeder
         DB::table('products')->insert([
             'name' => 'Celular',
             'slug' => 'celular',
-            'category_id' => 2,
+            'category_id' => 3,
             'status' => true,
             'created_at' => Carbon::now()
         ]);
@@ -39,7 +40,15 @@ class ProductoSeeder extends Seeder
         DB::table('products')->insert([
             'name' => 'Computadora Laptop',
             'slug' => 'computadora-reclinable',
-            'category_id' => 2,
+            'category_id' => 3,
+            'status' => false,
+            'created_at' => Carbon::now()
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Lavadora',
+            'slug' => 'lavadora',
+            'category_id' => 3,
             'status' => false,
             'created_at' => Carbon::now()
         ]);

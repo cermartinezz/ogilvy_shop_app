@@ -26,7 +26,7 @@ class CreateStocksTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedBigInteger('buyer')->nullable();
             $table->foreign('buyer')->references('id')->on('users');
-            $table->timestamp('purchase_date');
+            $table->timestamp('purchase_date')->nullable();
             $table->timestamps();
         });
     }

@@ -6,18 +6,25 @@ use App\Http\Resources\User as UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends ApiController
 {
     public  $loginAfterSignUp = true;
 
-
+    /**
+     * Valida que para los metodos de cierre de session y obtener datos del usuario quien lo solicite este logueado
+     * AuthController constructor.
+     */
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => ['logout','getAuthUser']]);
+        $this->middleware(['jwt.auth'], ['only' => ['logout','getAuthUser']]);
     }
 
+    /**
+     * Registra solo clientes dentro del sistema
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function registerClient(Request $request)
     {
         $validation = $this->validateRegister($request->all());
@@ -34,6 +41,11 @@ class AuthController extends ApiController
 
     }
 
+    /**
+     * Registra usuarios
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function registerUsers(Request $request)
     {
         $validation = $this->validateRegister($request->all());
@@ -50,6 +62,11 @@ class AuthController extends ApiController
 
     }
 
+    /**
+     * Inicio de session, crea un token con JWT para identificar al usuario
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request) {
 
         $input = $request->only('email', 'password');
@@ -63,6 +80,10 @@ class AuthController extends ApiController
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request  $request) {
 
         if(auth()->check()){
@@ -74,6 +95,12 @@ class AuthController extends ApiController
 
     }
 
+    /**
+     * Obtiene informacion del usuario
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAuthUser(Request $request) {
 
         $user = auth()->user();;
@@ -87,6 +114,11 @@ class AuthController extends ApiController
 
     }
 
+    /**
+     * Valida el registro de un usario
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validateRegister(array $data)
     {
         return Validator::make($data, [

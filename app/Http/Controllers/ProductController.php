@@ -25,7 +25,9 @@ class ProductController extends ApiController
      */
     public function index()
     {
-        //
+        $prductos = Product::all();
+
+        $this->respondSuccess("Productos",['productos'=> $prductos->toArray()]);
     }
 
     /**

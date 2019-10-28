@@ -23,7 +23,9 @@ class StockController extends ApiController
      */
     public function index()
     {
-        //
+        $productos = Stock::all();
+
+        $this->respondSuccess("Inventario",['inventario'=> $productos]);
     }
 
     /**

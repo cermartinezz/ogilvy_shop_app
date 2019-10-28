@@ -26,6 +26,7 @@ class AdminsOnly
 
         return Response::json([
             'resultado' => [
+                'status' => 'fail',
                 'error' => 'Access for admins only'
             ]
         ]);

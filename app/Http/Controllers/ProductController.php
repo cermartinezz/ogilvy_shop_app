@@ -15,7 +15,7 @@ class ProductController extends ApiController
 
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => ['store','update','destroy']]);
+        $this->middleware(['jwt.auth','isAdmin'], ['only' => ['index','store','update','destroy']]);
     }
 
     /**

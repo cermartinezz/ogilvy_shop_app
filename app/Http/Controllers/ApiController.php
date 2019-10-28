@@ -16,7 +16,7 @@ class ApiController extends Controller
     {
         return $this->setStatusCode(StatusResponse::HTTP_CREATED)->respond([
            'resultado' => [
-               'status' => 'success_create',
+               'status' => 'success',
                'ok' => true,
                'message' => $message,
                'data' => $data
@@ -46,7 +46,7 @@ class ApiController extends Controller
         return $this->setStatusCode(StatusResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->respond([
                 'resultado' => [
-                    'status' => 'fail_validation',
+                    'status' => 'fail',
                     'ok' => false,
                     "message" => $message,
                     "invalid_inputs" => $fields
@@ -57,7 +57,7 @@ class ApiController extends Controller
     public function respondFailAuthentication($message = "Credenciales incorrectas"){
         return $this->setStatusCode(StatusResponse::HTTP_UNAUTHORIZED)->respond([
             'resultado' => [
-                'status' => 'fail_authentication',
+                'status' => 'fail',
                 'ok' => false,
                 'message' => $message,
                 'status_code' => $this->getStatusCode()
@@ -68,7 +68,7 @@ class ApiController extends Controller
     public function respondInternalError($message = "Hubo un error con algo, pronto lo solventaremos"){
         return $this->setStatusCode(StatusResponse::HTTP_INTERNAL_SERVER_ERROR)->respond([
             'resultado' => [
-                'status' => 'crash',
+                'status' => 'fail',
                 'ok' => false,
                 'message' => $message,
                 'status_code' => $this->getStatusCode()
@@ -79,7 +79,7 @@ class ApiController extends Controller
     public function respondBadRequest($message){
         return $this->setStatusCode(StatusResponse::HTTP_BAD_REQUEST)->respond([
             'resultado' => [
-                'status' => 'not_to_bad_error',
+                'status' => 'fail',
                 'ok' => false,
                 'message' => $message,
                 'status_code' => $this->getStatusCode()

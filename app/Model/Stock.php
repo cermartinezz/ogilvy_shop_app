@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,6 +13,10 @@ class Stock extends Model
 
     public function product(){
         return $this->belongsTo(Product::class);
+    }
+
+    public function owner(){
+        return $this->belongsTo(User::class,'buyer');
     }
 
     public static function addItemToStock(Request $request){

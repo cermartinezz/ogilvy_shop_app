@@ -57,6 +57,7 @@ class Handler extends ExceptionHandler
                 \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
                 return response()->json([
                     'resultado' => [
+                        'status' => 'fail',
                         'error'=> 'TOKEN_EXPIRED'
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
@@ -64,6 +65,7 @@ class Handler extends ExceptionHandler
                 \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                 return response()->json([
                     'resultado' => [
+                        'status' => 'fail',
                         'error'=> 'TOKEN_INVALID'
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
@@ -71,6 +73,7 @@ class Handler extends ExceptionHandler
                 \Tymon\JWTAuth\Exceptions\TokenBlacklistedException) {
                 return response()->json([
                     'resultado' => [
+                        'status' => 'fail',
                         'error'=> 'TOKEN_BLACKLISTED'
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
@@ -78,6 +81,7 @@ class Handler extends ExceptionHandler
             if ($exception->getMessage() === 'Token not provided') {
                 return response()->json([
                     'resultado' => [
+                        'status' => 'fail',
                         'error'=> 'Token not provided'
                     ]
                 ],Response::HTTP_UNAUTHORIZED);
@@ -90,6 +94,7 @@ class Handler extends ExceptionHandler
             if(Str::contains($exception->getMessage(),'No query results for model')){
                 return response()->json([
                     'resultado' => [
+                        'status' => 'fail',
                         'error'=> "The $modelo requested does not exists"
                     ]
                 ],Response::HTTP_NOT_FOUND);

@@ -7,10 +7,10 @@ Creación de una SPA  para consumir API para compra de productos, registro de us
 
 Requerimientos para la prueba.
 
-Tener instalado 
+Tener instalado:
 
-Composer
-nodejs
+-Composer
+-nodejs
 
 [API documentacion](https://documenter.getpostman.com/view/3605815/SVzz1yWH)
 

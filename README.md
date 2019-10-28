@@ -9,8 +9,8 @@ Requerimientos para la prueba.
 
 Tener instalado:
 
--Composer
--nodejs
+- Composer
+- nodejs
 
 [API documentacion](https://documenter.getpostman.com/view/3605815/SVzz1yWH)
 
@@ -45,9 +45,11 @@ Instalacion
  
  Uso
  
- Para levantar la aplicacion se puede utilizar el siguiente comando
+ Para levantar la aplicacion se puede utilizar el siguiente comando dentro de la carpeta del proyecto desde la terminar
  
- php asrtisan verve deberia de levantar la aplicacion en la siguiente url
+ php asrtisan verve 
+ 
+ Esto deberia de levantar la aplicacion en la siguiente url
  
  http://127.0.0.1:8000/
  

@@ -7,8 +7,17 @@ Creación de una SPA  para consumir API para compra de productos, registro de us
 
 Requerimientos para la prueba.
 
-Tener instalado:
+Tener instalado en el servidor
 
+- PHP >= 7.2.0
+- BCMath PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
 - Composer
 - nodejs
 

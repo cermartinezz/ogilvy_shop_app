@@ -58,5 +58,9 @@ Instalacion
  Ruta base de la Aplicacion Web http://127.0.0.1:8000/
  
 
- Para probar la API adjunto al inicio la documentacion de esta de como se puede consumir desde una aplicacion como Postman o desde la terminar con curl, siempre y cuando este arriba la aplicacion.
+ Para probar la API adjunto al inicio la documentacion de esta, es necesario tener instalado la aplicacion POSTMAN para poder realizar las pruebas.
+ 
+ [POSTMAN](https://www.getpostman.com/downloads/)
+ 
+ 
  

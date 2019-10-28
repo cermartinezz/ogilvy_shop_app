@@ -5,7 +5,12 @@
 
 Creación de una SPA  para consumir API para compra de productos, registro de usuarios administradores y clientes, gestión de productos y gestión de inventario
 
-[Github Link ](https://github.com/CezMartinez/ogilvy_shop_app)
+Requerimientos para la prueba.
+
+Tener instalado 
+
+Composer
+nodejs
 
 [API documentacion](https://documenter.getpostman.com/view/3605815/SVzz1yWH)
 
@@ -18,11 +23,25 @@ Tecnologias:
 
 Instalacion
 
+ - crear archivo .env y copiar contenido del archivo .env.example
+ - crear base de datos de mysql
+ - modificar los siguientes campos el archivo .env con las credenciales de la base de datos creada
+ 
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravel
+    DB_USERNAME=root
+    DB_PASSWORD=
+    
+ Acceder a la carpeta del proyecto desde la terminar y ejecutar los siguientes comandos.
+ 
  - Composer install
  - npm install
  - npm run dev
  - php artisan jwt:secret
  - php artisan key:generate
+ - php artisan migrate:refresh --seed 
  
  Uso
  
